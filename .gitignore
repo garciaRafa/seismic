@@ -58,6 +58,14 @@ temp/
 # --------------------------------
 .DS_Store
 Thumbs.db
+ehthumbs.db
+Desktop.ini
+*.lnk
+*.Zone.Identifier
+$RECYCLE.BIN/
+
+*~
+.cache/
 
 .vscode/
 .idea/
