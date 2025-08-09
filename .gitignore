@@ -1,0 +1,73 @@
+# --------------------------------
+# Python
+# --------------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+
+# Virtualenv / env files
+venv/
+.env
+.venv/
+env/
+ENV/
+
+# pip wheel / build
+build/
+dist/
+
+# --------------------------------
+# Jupyter / Notebooks
+# --------------------------------
+.ipynb_checkpoints
+*.nbconvert.ipynb
+*.ipynb_checkpoints/
+
+# --------------------------------
+# Datas e results
+# --------------------------------
+data/raw/
+data/large/
+*.sgy
+*.segy
+*.bin
+*.dat
+*.npy
+*.npz
+
+results/
+outputs/
+figures/
+
+# --------------------------------
+# Logs, caches and misc
+# --------------------------------
+*.log
+tmp/
+temp/
+*.sqlite
+*.db
+*.tar
+*.gz
+
+# --------------------------------
+# OS / Editor
+# --------------------------------
+.DS_Store
+Thumbs.db
+
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# --------------------------------
+# Secrets / local configuration
+# --------------------------------
+*.key
+*.pem
+secrets/
+credentials/
