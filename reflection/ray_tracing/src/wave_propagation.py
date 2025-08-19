@@ -36,3 +36,4 @@ def plot_wave_types():
 
     plt.tight_layout()
     plt.show()
+    # fig.savefig("wave_propagation.png")
