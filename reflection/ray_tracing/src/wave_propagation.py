@@ -21,3 +21,18 @@ def plot_wave_types():
     ax1.set_xlabel('Propagation direction')
     ax1.grid(True)
     ax1.set_title('P-wave (Longitudinal)')
+
+    # S-wave
+    
+    ax2 = fig.add_subplot(2, 1, 2)
+    for ti in t:
+        displacement = 0.5 * np.sin(x - ti)
+        ax2.plot(x, displacement + ti/5, 'go-', alpha=0.5)
+        ax2.plot(x, np.zeros_like(x) + ti/5, 'k--', alpha=0.2)
+    ax2.set_ylabel('Vertical displacement')
+    ax2.set_xlabel('Propagation direction')
+    ax2.grid(True)
+    ax2.set_title('S-wave (Transverse)')
+
+    plt.tight_layout()
+    plt.show()
