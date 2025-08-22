@@ -1,6 +1,5 @@
 """
 Functions for creating and handling seismic model geometry.
-Part of the seismic modeling project using ray tracing.
 """
 
 import numpy as np
