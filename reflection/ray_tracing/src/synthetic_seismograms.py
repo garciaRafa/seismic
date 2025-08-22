@@ -1,5 +1,5 @@
 """
-Functions to generate synthetic seismograms.
+Functions to generate synthetic seismograms and comparative plots.
 """
 
 import numpy as np
@@ -86,7 +86,7 @@ def plot_hyperbola_curves(receiver_x, hyperbolas, title='Reflection Hyperbolas')
 
 def plot_seismogram(seismogram, receiver_x, duration, title='Synthetic Seismogram'):
     """
-    Plot synthetic seismogram using gray scale.
+    Plot synthetic seismogram.
     
     Parameters:
     - seismogram: 2D array of seismic data
@@ -137,3 +137,51 @@ def plot_comparison_seismograms(seismograms, receiver_x, duration, titles):
     
     plt.tight_layout()
     return fig, axes
+
+def plot_hyperbola_seismogram_comparison(receiver_x, hyperbolas, seismograms, duration, dip_angles):
+    """
+    Plot side-by-side comparison of hyperbola curves and corresponding seismograms.
+    
+    Parameters:
+    - receiver_x: array of receiver positions
+    - hyperbolas: dictionary with dip angles as keys and travel times as values
+    - seismograms: dictionary with dip angles as keys and seismogram arrays as values
+    - duration: total time duration
+    - dip_angles: list of dip angles to plot
+    """
+    for angle in dip_angles:
+        # Create figure with 2 subplots
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8))
+        
+        # Left plot: Hyperbola curve
+        ax1.plot(receiver_x, hyperbolas[angle], 'b-', linewidth=3, label=f'Dip: {angle}°')
+        ax1.set_xlabel('Receiver Position (m)', fontsize=14)
+        ax1.set_ylabel('Two-Way Travel Time (s)', fontsize=14)
+        ax1.set_title(f'Hyperbola Curve - {angle}° Dip', fontsize=16, fontweight='bold')
+        ax1.grid(True, alpha=0.3)
+        ax1.legend(fontsize=12)
+        ax1.invert_yaxis()
+        
+        # Right plot: Synthetic seismogram
+        extent = [receiver_x[0], receiver_x[-1], duration, 0]
+        im = ax2.imshow(seismograms[angle].T, aspect='auto', cmap='gray', extent=extent, 
+                       vmin=-1, vmax=1)
+        ax2.set_xlabel('Receiver Position (m)', fontsize=14)
+        ax2.set_ylabel('Two-Way Time (s)', fontsize=14)
+        ax2.set_title(f'Synthetic Seismogram - {angle}° Dip', fontsize=16, fontweight='bold')
+        
+        # Add colorbar to seismogram
+        cbar = plt.colorbar(im, ax=ax2)
+        cbar.set_label('Normalized Amplitude', fontsize=12)
+        
+        """
+        # Add hyperbola curve overlay on seismogram
+        ax2.plot(receiver_x, hyperbolas[angle], 'r-', linewidth=2, alpha=0.8, 
+                label='Theoretical Hyperbola')
+        ax2.legend(fontsize=12, loc='lower right')
+        """
+
+        plt.suptitle(f'Comparison: Hyperbola vs Seismogram - {angle}° Dip Reflector', 
+                    fontsize=18, fontweight='bold', y=0.98)
+        plt.tight_layout()
+        plt.show()
