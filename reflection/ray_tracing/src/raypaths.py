@@ -50,6 +50,29 @@ def calculate_travel_times_dipping(source_x, receiver_x, reflector_depth, veloci
     
     return travel_times
 
+def calculate_travel_times_depth_velocity_tradeoff(source_x, receiver_x, depth_velocity_pairs):
+    """
+    """
+    results = {}
+    for depth, velocity in depth_velocity_pairs:
+        times = calculate_travel_times_horizontal(source_x, receiver_x, depth, velocity)
+        results[(depth, velocity)] = times
+    return results
+
+def calculate_travel_times_two_layers(source_x, receiver_x, depth1, depth2, v1, v2):
+    """
+    """
+    dx = receiver_x - source_x
+    t1 = np.sqrt((4 * depth1**2 + dx**2) / v1**2)
+    t2 = np.sqrt((4 * depth2 + dx**2) / v2**2)
+    return t1, t2
+
+def calculate_travel_times_source_shifted(source_x, receiver_x, reflector_depth, velocity, dip_angle, source_shift):
+    """
+    """
+    shifted_source = source_x + source_shift
+    return calculate_travel_times_dipping(shifted_source, receiver_x, reflector_depth, velocity, dip_angle)
+
 def generate_hyperbola_curves(source_x, receiver_x, reflector_depth, velocity, dip_angles):
     """
     Generate hyperbola curves for multiple dip angles.
