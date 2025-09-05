@@ -27,7 +27,7 @@ dist/
 *.ipynb_checkpoints/
 
 # --------------------------------
-# Datas e results
+# Data and results
 # --------------------------------
 data/raw/
 data/large/
