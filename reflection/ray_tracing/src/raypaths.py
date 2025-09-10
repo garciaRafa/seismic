@@ -97,3 +97,28 @@ def generate_hyperbola_curves(source_x, receiver_x, reflector_depth, velocity, d
         hyperbolas[angle] = travel_times
     
     return hyperbolas
+
+def generate_ambiguous_models(source_x, receiver_x, reflector_depth, velocity):
+    """
+    """
+    models = {}
+
+    # Base horizontal
+    models["horizontal"] = calculate_travel_times_horizontal(source_x, receiver_x, reflector_depth, velocity)
+
+    # Small dip vs horizontal
+    models["dip_10"] = calculate_travel_times_dipping(source_x, receiver_x, reflector_depth+20, velocity, 10)
+
+    # Depth-velocity tradeoff
+    models["shallow_slow"] = calculate_travel_times_horizontal(source_x, receiver_x, reflector_depth-50, velocity-400)
+    models["deep_fast"] = calculate_travel_times_horizontal(source_x, receiver_x, reflector_depth+100, velocity+500)
+
+    # Two layers
+    t1, t2 = calculate_travel_times_two_layers(source_x, receiver_x, reflector_depth-50, reflector_depth+80, velocity, velocity)
+    models["two_layers_top"] = t1
+    models["two_layers_bottom"] = t2
+
+    # Source shifted + dip
+    models["dip_15_shifted"] = calculate_travel_times_source_shifted(source_x, receiver_x, reflector_depth, velocity, 15, source_shift=100)
+
+    return models
