@@ -75,7 +75,7 @@ def calculate_travel_times_two_layers(source_x, receiver_x, depth1, depth2, v1, 
     """
     dx = receiver_x - source_x
     t1 = np.sqrt((4 * depth1**2 + dx**2) / v1**2)
-    t2 = np.sqrt((4 * depth2 + dx**2) / v2**2)
+    t2 = np.sqrt((4 * depth2**2 + dx**2) / v2**2)
     return t1, t2
 
 def calculate_travel_times_source_shifted(source_x, receiver_x, reflector_depth, velocity, dip_angle, source_shift):
