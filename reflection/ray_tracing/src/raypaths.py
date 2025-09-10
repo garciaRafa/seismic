@@ -52,6 +52,11 @@ def calculate_travel_times_dipping(source_x, receiver_x, reflector_depth, veloci
 
 def calculate_travel_times_depth_velocity_tradeoff(source_x, receiver_x, depth_velocity_pairs):
     """
+    Generate travel times for multiple (depth, velocity) pairs.
+    Demonstrates the trade-off: deeper + faster vs shallower + slower.
+    
+    Returns:
+    - dictionary with (depth, velocity) as key and travel times as value
     """
     results = {}
     for depth, velocity in depth_velocity_pairs:
@@ -61,6 +66,12 @@ def calculate_travel_times_depth_velocity_tradeoff(source_x, receiver_x, depth_v
 
 def calculate_travel_times_two_layers(source_x, receiver_x, depth1, depth2, v1, v2):
     """
+    Reflection from two horizontal reflectors (layered model).
+    Useful to simulate thin-bed ambiguity vs single deeper reflector.
+    
+    Returns:
+    - t1: travel times for first reflector
+    - t2: travel times for second reflector
     """
     dx = receiver_x - source_x
     t1 = np.sqrt((4 * depth1**2 + dx**2) / v1**2)
@@ -69,6 +80,11 @@ def calculate_travel_times_two_layers(source_x, receiver_x, depth1, depth2, v1, 
 
 def calculate_travel_times_source_shifted(source_x, receiver_x, reflector_depth, velocity, dip_angle, source_shift):
     """
+    Reflection from dipping reflector with shifted source position.
+    Shifting the source can mimic a different dip/geometry.
+    
+    Parameters:
+    - source_shift: horizontal displacement of the source
     """
     shifted_source = source_x + source_shift
     return calculate_travel_times_dipping(shifted_source, receiver_x, reflector_depth, velocity, dip_angle)
@@ -100,6 +116,11 @@ def generate_hyperbola_curves(source_x, receiver_x, reflector_depth, velocity, d
 
 def generate_ambiguous_models(source_x, receiver_x, reflector_depth, velocity):
     """
+    Generate a dictionary of different ambiguous scenarios.
+    Includes: horizontal, dipping, depth-velocity tradeoff, two layers, source shift.
+    
+    Returns:
+    - dictionary with model name as key and travel times as value
     """
     models = {}
 
