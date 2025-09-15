@@ -140,6 +140,6 @@ def generate_ambiguous_models(source_x, receiver_x, reflector_depth, velocity):
     models["two_layers_bottom"] = t2
 
     # Source shifted + dip
-    models["dip_15_shifted"] = calculate_travel_times_source_shifted(source_x, receiver_x, reflector_depth, velocity, 15, source_shift=100)
+    models["dip_15_shifted"] = calculate_travel_times_source_shifted(source_x, receiver_x, reflector_depth, velocity, 15, source_shift=200)
 
     return models
