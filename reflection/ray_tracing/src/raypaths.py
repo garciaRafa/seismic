@@ -22,7 +22,7 @@ def calculate_travel_times_horizontal(source_x, receiver_x, reflector_depth, vel
     v = velocity
     
     # Travel time formula for horizontal reflector
-    travel_times = np.sqrt((4 * h**2 + dx**2) / v**2)
+    travel_times = np.sqrt(4 * h**2 + dx**2) / v
     
     return travel_times
 
@@ -46,7 +46,7 @@ def calculate_travel_times_dipping(source_x, receiver_x, reflector_depth, veloci
     theta = np.radians(dip_angle)
     
     # Travel time formula for dipping reflector
-    travel_times = np.sqrt((4 * h**2 + dx**2 + 4 * h * dx * np.sin(theta)) / v**2)
+    travel_times = np.sqrt(4 * h**2 + dx**2 + 4 * h * dx * np.sin(theta)) / v
     
     return travel_times
 
@@ -74,8 +74,8 @@ def calculate_travel_times_two_layers(source_x, receiver_x, depth1, depth2, v1, 
     - t2: travel times for second reflector
     """
     dx = receiver_x - source_x
-    t1 = np.sqrt((4 * depth1**2 + dx**2) / v1**2)
-    t2 = np.sqrt((4 * depth2**2 + dx**2) / v2**2)
+    t1 = np.sqrt(4 * depth1**2 + dx**2) / v1
+    t2 = np.sqrt(4 * depth2**2 + dx**2) / v2
     return t1, t2
 
 def calculate_travel_times_source_shifted(source_x, receiver_x, reflector_depth, velocity, dip_angle, source_shift):
