@@ -3,6 +3,7 @@ Functions to compute ray paths and travel times for hyperbolic analysis.
 """
 
 import numpy as np
+import matplotlib.pyplot as plt
 
 def calculate_travel_times_horizontal(source_x, receiver_x, reflector_depth, velocity):
     """
@@ -147,6 +148,31 @@ def generate_ambiguous_models(source_x, receiver_x, reflector_depth, velocity):
     models["dip_15_shifted"] = calculate_travel_times_source_shifted(source_x, receiver_x, reflector_depth, velocity, 15, source_shift=200)
 
     return models
+
+
+def plot_model_horizontal(depth=2.0, x_min=0, x_max=10, n_receivers=11):
+    """
+    Plot a simple horizontal reflector model with source and receivers.
+    """
+
+    fig, ax = plt.subplots(figsize=(8, 4))
+
+    ax.set_xlim(x_min, x_max)
+    ax.set_ylim(depth + 1, 0) 
+
+    source_x = (x_min + x_max) / 2
+    ax.scatter(source_x, 0, c="red", marker="*", s=120, label="source")
+
+    receivers_x = np.linspace(x_min, x_max, n_receivers)
+    ax.scatter(receivers_x, np.zeros_like(receivers_x), c="blue", marker="v", label="Receivers")
+
+    ax.hlines(depth, x_min, x_max, colors="black", linestyles="--", label=f"Reflector at z={depth}")
+
+    ax.set_xlabel("Distance (x)")
+    ax.set_ylabel("Depth (z)")
+    ax.legend()
+    ax.set_title("Horizontal Reflector Model")
+    plt.show()
 
 def plot_model_depth_velocity_tradeoff(depths, velocities, labels=None):
     """
