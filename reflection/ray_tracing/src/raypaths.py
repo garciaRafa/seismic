@@ -147,3 +147,34 @@ def generate_ambiguous_models(source_x, receiver_x, reflector_depth, velocity):
     models["dip_15_shifted"] = calculate_travel_times_source_shifted(source_x, receiver_x, reflector_depth, velocity, 15, source_shift=200)
 
     return models
+
+def plot_model_depth_velocity_tradeoff(depths, velocities, labels=None):
+    """
+    Plots two reflector models (different depth/velocity) to illustrate the depth-velocity tradeoff ambiguity.
+    """
+
+    pass
+
+def plot_model_horizontal_vs_dip(depth_horizontal, depth_dip, dip_angle):
+    """
+    PLots two reflectors models(horizontal vs dipping layer) to illustrate the source-shifted ambiguity.
+    """
+
+    pass
+
+def plot_tradeoff_pair():
+    """
+    Shows side-by-side the reflectors models and their corresponding hyperbolas / synthetic seismograms 
+    for depth-velocity tradeoff.     
+    """
+    
+    pass
+
+def plot_horizontal_vs_dip_pair():
+    """
+    Shows side-by-side the reflectors models and their corresponding hyperbolas / synthetic seismograms 
+    for horizontal and dip ambiguity.     
+    """
+
+    pass
+
