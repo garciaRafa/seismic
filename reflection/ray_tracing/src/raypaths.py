@@ -64,19 +64,21 @@ def calculate_travel_times_depth_velocity_tradeoff(source_x, receiver_x, depth_v
         results[(depth, velocity)] = times
     return results
 
+"""
 def calculate_travel_times_two_layers(source_x, receiver_x, depth1, depth2, v1, v2):
-    """
-    Reflection from two horizontal reflectors (layered model).
-    Useful to simulate thin-bed ambiguity vs single deeper reflector.
     
-    Returns:
-    - t1: travel times for first reflector
-    - t2: travel times for second reflector
-    """
+    # Reflection from two horizontal reflectors (layered model).
+    # Useful to simulate thin-bed ambiguity vs single deeper reflector.
+    
+    # Returns:
+    # - t1: travel times for first reflector
+    # - t2: travel times for second reflector
+    
     dx = receiver_x - source_x
     t1 = np.sqrt(4 * depth1**2 + dx**2) / v1
     t2 = np.sqrt(4 * depth2**2 + dx**2) / v2
     return t1, t2
+"""
 
 def calculate_travel_times_source_shifted(source_x, receiver_x, reflector_depth, velocity, dip_angle, source_shift):
     """
@@ -134,10 +136,12 @@ def generate_ambiguous_models(source_x, receiver_x, reflector_depth, velocity):
     models["shallow_slow"] = calculate_travel_times_horizontal(source_x, receiver_x, reflector_depth-50, velocity-400)
     models["deep_fast"] = calculate_travel_times_horizontal(source_x, receiver_x, reflector_depth+100, velocity+500)
 
+    """
     # Two layers
     t1, t2 = calculate_travel_times_two_layers(source_x, receiver_x, reflector_depth-50, reflector_depth+80, velocity, velocity)
     models["two_layers_top"] = t1
     models["two_layers_bottom"] = t2
+    """
 
     # Source shifted + dip
     models["dip_15_shifted"] = calculate_travel_times_source_shifted(source_x, receiver_x, reflector_depth, velocity, 15, source_shift=200)
