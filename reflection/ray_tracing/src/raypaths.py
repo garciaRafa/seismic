@@ -174,6 +174,41 @@ def plot_model_horizontal(depth=2.0, x_min=0, x_max=10, n_receivers=11):
     ax.set_title("Horizontal Reflector Model")
     plt.show()
 
+def plot_model_dip(depth_ref=2.0, dip_angle=15, x_min=0, x_max=10, n_receivers=11):
+    """
+    Plot a dipping reflector model with source and receivers
+
+    Parameters:
+    - depth_ref: Depth of reflector at the center(reference point).
+    - dip_angle: Dip angle in degrees(positive = dipping to the right).
+    - x_min, x_max: Horizontal range of the model
+    - n_receivers: Number of receivers at the surface
+    """
+
+    fig, ax = plt.subplots(figsize=(8, 4))
+
+    ax.set_xlim(x_min, x_max)
+    ax.set_ylim(depth_ref + 2, 0)
+
+    source_x = (x_min + x_max) / 2
+    ax.scatter(source_x, 0, c="red", marker="*", s=120, label="Source")
+
+    receivers_x = np.linspace(x_min, x_max, n_receivers)
+    ax.scatter(receivers_x, np.zeros_like(receivers_x), c="blue", marker="v", label="Receivers")
+
+    dip_rad = np.radians(dip_angle)
+    reflector_x = np.linspace(x_min, x_max, 200)
+    reflector_z = depth_ref + np.tan(dip_rad) * (reflector_x - source_x)
+
+    ax.plot(reflector_x, reflector_z, color="black", linestyle="--", label=f"Dip {dip_angle}°")
+
+    ax.set_xlabel("Distance (x)")
+    ax.set_ylabel("Depth (z)")
+    ax.legend()
+    ax.set_title("Dipping Reflector Model")
+    plt.show()
+
+
 def plot_model_depth_velocity_tradeoff(depths, velocities, labels=None):
     """
     Plots two reflector models (different depth/velocity) to illustrate the depth-velocity tradeoff ambiguity.
